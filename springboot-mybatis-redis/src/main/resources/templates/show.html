@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>SpringBoot模版渲染</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <script type="text/javascript" th:src="@{/static/js/main.js}"></script>
+
+</head>
+<body>
+
+<div th:object="${city}">
+    <p th:text="'城市名：' + *{getCityName()}"/>
+    <p th:text="'城市描述：' + *{getDescription()}"/>
+    <p th:text="'城市id：' + *{getId()}"/>
+    <p th:text="'城市简称：' + *{getProvinceId()}"/>
+</div>
+
+
+
+
+
+</body>
+</html>
