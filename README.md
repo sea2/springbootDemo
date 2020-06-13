@@ -12,13 +12,8 @@ https://github.com/JeffLi1993/springcloud-learning-example
 Spring For All 社区 ⑪ 517395240 <br>
 Spring For All 社区 ⑫ 498098401 <br>
 
-博主微信：139-5868-6678
 
-## 作者与学习乐园
-源码地址：我的[GitHub地址](https://github.com/JeffLi1993 "GitHub")、[OSCGit地址](https://git.oschina.net/jeff1993/springboot-learning-example "OSCGit")<br>
-作者：[泥瓦匠BYSocket](http://www.bysocket.com/ "泥瓦匠BYSocket")<br>
-关注微信公众号【泥瓦匠BYSokcet】，及时得到技术文章推送<br>
-![公众号](http://www.bysocket.com/wp-content/uploads/2017/01/qrcode_for_gh_cd421e7eb7d6_430.jpg)
+
 
 
 ## 一、项目结构
