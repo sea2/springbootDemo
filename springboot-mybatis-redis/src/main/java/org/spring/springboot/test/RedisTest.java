@@ -1,7 +1,6 @@
 package org.spring.springboot.test;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.spring.springboot.util.RedisUtils;
 import org.springframework.boot.test.context.SpringBootTest;
 
