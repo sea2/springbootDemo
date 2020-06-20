@@ -1,6 +1,8 @@
 package org.spring.springboot.interceptor;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -20,6 +22,7 @@ import java.util.Date;
  */
 @Component
 public class MyInterceptor implements HandlerInterceptor {
+    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
     // 进入controller之前
     @Override
@@ -30,6 +33,9 @@ public class MyInterceptor implements HandlerInterceptor {
         System.out.println("拦截器 " + ((HandlerMethod) handler).getBean().getClass().getName()); // 类名
         System.out.println("拦截器 " + ((HandlerMethod) handler).getMethod().getName()); // 方法名
         request.setAttribute("startTime", new Date().getTime());
+
+        LOGGER.info("-------"+request.getRequestURL().toString());// 打印url
+
         return true; // 是否调用后续方法（controller接口方法、postHandle、afterCompletion）
     }
 

@@ -1,0 +1,84 @@
+{
+  "code": "200",
+  "data": {
+    "comments": [
+      {
+        "id": 6,
+        "game_id": 2484,
+        "user_id": 4,
+        "content": "很不错恶心一路通",
+        "star": 4,
+        "reply_num": 0,
+        "top_num": 0,
+        "created_at": "2019-07-10 09:52:34",
+        "updated_at": "2019-07-10 09:52:34",
+        "is_top": 0,
+        "user": {
+          "id": 4,
+          "user_name": "天冬",
+          "phone": "13636415907"
+        },
+        "child_tow": []
+      },
+      {
+        "id": 7,
+        "game_id": 2484,
+        "user_id": 9248,
+        "content": "666666666666",
+        "star": 5,
+        "reply_num": 0,
+        "top_num": 0,
+        "created_at": "2019-07-10 12:05:22",
+        "updated_at": "2019-07-10 12:05:22",
+        "is_top": 0,
+        "user": {
+          "id": 9248,
+          "user_name": "JZ1000190605104525",
+          "phone": "13816498934"
+        },
+        "child_tow": []
+      }
+
+
+  ],
+  "games": [
+    {
+      "id": 2483,
+      "game_name": "大闹天空",
+      "type": "1",
+      "game_tags": "角色@=动作@=冒险",
+      "game_link": null,
+      "game_icon": "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1737871035,576597026&fm=26&gp=0.jpg",
+      "game_small_desc": null,
+      "game_desc": null,
+      "game_ver": null,
+      "game_last_update": null,
+      "game_allow_system": null,
+      "download_url": "1555559693618_th.jpeg.png",
+      "game_file_size": null,
+      "game_play_url": null,
+      "down_count": 0,
+      "game_pay_callback": "http://123.206.114.224/api/testGameCallBack",
+      "md5_key": "GwlmON1Ex8CYYs4v0#Hx",
+      "game_banner": null,
+      "pinyin": null,
+      "game_divide": 50,
+      "cp_divide": 50,
+      "promote_ratio": 50,
+      "discount": 58,
+      "real_count": 2,
+      "real_name": 1,
+      "bind_phone": 0,
+      "bind_count": 3,
+      "created_at": "2019-04-10 14:22:28",
+      "updated_at": "2019-04-22 17:59:20",
+      "deleted_at": null,
+      "status": 0,
+      "game_img": [],
+      "box_name": null,
+      "cp_game": null,
+      "index_img": null
+    }
+  ]
+}
+}
