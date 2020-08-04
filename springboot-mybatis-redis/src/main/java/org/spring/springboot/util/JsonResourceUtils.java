@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
+import org.springframework.core.io.ClassPathResource;
 
 import java.io.File;
 import java.net.URL;
@@ -27,7 +28,7 @@ public class JsonResourceUtils {
 
         try {
 
-            URL url = JsonResourceUtils.class.getResource(filename);
+            URL url = new ClassPathResource(filename).getURL();
             String path = url.getPath();
             File file = new File(path);
             if (file.exists()) {

@@ -4,7 +4,10 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.SpringBootVersion;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import javax.swing.*;
 
 /**
  * Spring Boot 应用启动类
@@ -23,9 +26,6 @@ public class Application {
         // 启动嵌入式的 Tomcat 并初始化 Spring 环境及其各 Spring 组件
         SpringApplication.run(Application.class,args);
     }
-
-
-
 
 
 

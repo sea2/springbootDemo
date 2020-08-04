@@ -15,13 +15,14 @@ public class MyFilter implements Filter {
     }
 
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        System.out.println("过滤器 filter start");
-        long startTime = new Date().getTime();
-        filterChain.doFilter(servletRequest,servletResponse);
-        long endTime = new Date().getTime();
-        System.out.println("过滤器 filter:" + (endTime - startTime));
-        System.out.println("过滤器 filter finish");
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)  {
+        try {
+            filterChain.doFilter(servletRequest, servletResponse);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ServletException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

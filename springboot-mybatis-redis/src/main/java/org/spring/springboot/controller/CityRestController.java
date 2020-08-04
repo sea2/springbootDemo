@@ -1,12 +1,19 @@
 package org.spring.springboot.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import org.apache.commons.io.IOUtils;
 import org.spring.springboot.domain.City;
 import org.spring.springboot.service.CityService;
 import org.spring.springboot.util.JsonResourceUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
+import org.springframework.core.io.Resource;
+
+import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.List;
 
 /**
@@ -44,53 +51,169 @@ public class CityRestController {
         cityService.deleteCity(id);
     }
 
-
+    @Value("classpath:json/getNewIndex.json")
+    private Resource getNewIndex;
     @RequestMapping(value = "/api/getNewIndex")
     public JSONObject getNewIndex() {
-        return JsonResourceUtils.getJsonObjFromResource("/json/getNewIndex.json");
+        String areaData = null;
+        try {
+            areaData = IOUtils.toString(getNewIndex.getInputStream(), Charset.forName("UTF-8"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return (JSONObject) JSON.parse(areaData);
     }
+
+    @Value("classpath:json/showGameInfo.json")
+    private Resource showGameInfo;
     @RequestMapping(value = "/api/showGameInfo")
     public JSONObject showGameInfo() {
-        return JsonResourceUtils.getJsonObjFromResource("/json/showGameInfo.json");
+        String areaData = null;
+        try {
+            areaData = IOUtils.toString(showGameInfo.getInputStream(), Charset.forName("UTF-8"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return (JSONObject) JSON.parse(areaData);
     }
+
+    @Value("classpath:json/getCommentList.json")
+    private Resource getCommentList;
     @RequestMapping(value = "/api/getCommentList")
     public JSONObject getCommentList() {
-        return JsonResourceUtils.getJsonObjFromResource("/json/getCommentList.json");
+        String areaData = null;
+        try {
+            areaData = IOUtils.toString(getCommentList.getInputStream(), Charset.forName("UTF-8"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return (JSONObject) JSON.parse(areaData);
     }
+
+    @Value("classpath:json/getInfoComment.json")
+    private Resource getInfoComment;
     @RequestMapping(value = "/api/getInfoComment")
     public JSONObject getInfoComment() {
-        return JsonResourceUtils.getJsonObjFromResource("/json/getInfoComment.json");
+        String areaData = null;
+        try {
+            areaData = IOUtils.toString(getInfoComment.getInputStream(), Charset.forName("UTF-8"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return (JSONObject) JSON.parse(areaData);
     }
+
+    @Value("classpath:json/getStartAd.json")
+    private Resource getStartAd;
     @RequestMapping(value = "/api/getStartAd")
     public JSONObject getStartAd() {
-        return JsonResourceUtils.getJsonObjFromResource("/json/getStartAd.json");
+        String areaData = null;
+        try {
+            areaData = IOUtils.toString(getStartAd.getInputStream(), Charset.forName("UTF-8"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return (JSONObject) JSON.parse(areaData);
     }
+
+    @Value("classpath:json/getActivity.json")
+    private Resource getActivity;
+
     @RequestMapping(value = "/api/getActivity")
     public JSONObject getActivity() {
-        return JsonResourceUtils.getJsonObjFromResource("/json/getActivity.json");
+        String areaData = null;
+        try {
+            areaData = IOUtils.toString(getActivity.getInputStream(), Charset.forName("UTF-8"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return (JSONObject) JSON.parse(areaData);
     }
+
+    @Value("classpath:json/sendCode.json")
+    private Resource sendCode;
+
     @RequestMapping(value = "/api/sendCode")
     public JSONObject sendCode() {
-        return JsonResourceUtils.getJsonObjFromResource("/json/sendCode.json");
+        String areaData = null;
+        try {
+            areaData = IOUtils.toString(sendCode.getInputStream(), Charset.forName("UTF-8"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return (JSONObject) JSON.parse(areaData);
     }
+
+    @Value("classpath:json/appLogin.json")
+    private Resource appLogin;
+
     @RequestMapping(value = "/api/appLogin")
     public JSONObject appLogin() {
-        return JsonResourceUtils.getJsonObjFromResource("/json/appLogin.json");
+        String areaData = null;
+        try {
+            areaData = IOUtils.toString(appLogin.getInputStream(), Charset.forName("UTF-8"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return (JSONObject) JSON.parse(areaData);
     }
+
+    @Value("classpath:json/sharePage.json")
+    private Resource sharePage;
+
     @RequestMapping(value = "/api/sharePage")
     public JSONObject sharePage() {
-        return JsonResourceUtils.getJsonObjFromResource("/json/sharePage.json");
+        String areaData = null;
+        try {
+            areaData = IOUtils.toString(sharePage.getInputStream(), Charset.forName("UTF-8"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return (JSONObject) JSON.parse(areaData);
     }
+
+    @Value("classpath:json/getNewMoreGames.json")
+    private Resource getNewMoreGames;
+
     @RequestMapping(value = "/api/getNewMoreGames")
     public JSONObject getNewMoreGames() {
-        return JsonResourceUtils.getJsonObjFromResource("/json/getNewMoreGames.json");
+        String areaData = null;
+        try {
+            areaData = IOUtils.toString(getNewMoreGames.getInputStream(), Charset.forName("UTF-8"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return (JSONObject) JSON.parse(areaData);
     }
+
+    @Value("classpath:json/getMoreGames.json")
+    private Resource jsonResourcegetDownLists;
+
     @RequestMapping(value = "/api/getDownLists")
     public JSONObject getDownLists() {
-        return JsonResourceUtils.getJsonObjFromResource("/json/getMoreGames.json");
+        String areaData = null;
+        try {
+            areaData = IOUtils.toString(jsonResourcegetDownLists.getInputStream(), Charset.forName("UTF-8"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return (JSONObject) JSON.parse(areaData);
     }
+
+
+    @Value("classpath:json/getMoreGames.json")
+    private Resource jsonResource;
+
     @RequestMapping(value = "/api/getMoreGames")
     public JSONObject getMoreGames() {
-        return JsonResourceUtils.getJsonObjFromResource("/json/getMoreGames.json");
+        String areaData = null;
+        try {
+            areaData = IOUtils.toString(jsonResource.getInputStream(), Charset.forName("UTF-8"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return (JSONObject) JSON.parse(areaData);
     }
+
+
 }

@@ -1,0 +1,10 @@
+@charset "UTF-8";
+body {
+    width: 16rem;
+    text-align: center;
+    margin: 0 auto;
+    padding: 0; }
+p {
+    color: #ff313f;
+   background: aquamarine;
+}
