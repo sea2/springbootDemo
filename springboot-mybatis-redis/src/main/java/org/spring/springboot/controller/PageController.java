@@ -16,21 +16,28 @@ public class PageController {
 
 
     @RequestMapping("/api/test")
-    public String test(Model model){
-
-        model.addAttribute("city", cityService.findAllCity().get(0));
-        model.addAttribute("citys", cityService.findAllCity());
+    public String test(Model model) {
+        if (cityService.findAllCity() != null && cityService.findAllCity().size() > 0) {
+            model.addAttribute("city", cityService.findAllCity().get(0));
+            model.addAttribute("citys", cityService.findAllCity());
+        }
         return "test";
     }
 
 
     @RequestMapping("/api/show")
-    public String show(Model model){
+    public String show(Model model) {
 
         model.addAttribute("city", cityService.findAllCity().get(0));
         model.addAttribute("citys", cityService.findAllCity());
+
+
         return "show";
     }
 
 
 }
+
+
+
+

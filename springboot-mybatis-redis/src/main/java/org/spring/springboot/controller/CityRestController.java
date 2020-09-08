@@ -31,25 +31,35 @@ public class CityRestController {
         return cityService.findCityById(id);
     }
 
+
+
     @RequestMapping(value = "/api/allCity", method = RequestMethod.GET)
     public List<City> findOneCity() {
         return cityService.findAllCity();
     }
+
+
 
     @RequestMapping(value = "/api/city", method = RequestMethod.POST)
     public void createCity(@RequestBody City city) {
         cityService.saveCity(city);
     }
 
+
+
     @RequestMapping(value = "/api/city", method = RequestMethod.PUT)
     public void modifyCity(@RequestBody City city) {
         cityService.updateCity(city);
     }
 
+
+
     @RequestMapping(value = "/api/city/{id}", method = RequestMethod.DELETE)
     public void modifyCity(@PathVariable("id") Long id) {
         cityService.deleteCity(id);
     }
+
+
 
     @Value("classpath:json/getNewIndex.json")
     private Resource getNewIndex;
@@ -64,6 +74,8 @@ public class CityRestController {
         return (JSONObject) JSON.parse(areaData);
     }
 
+
+
     @Value("classpath:json/showGameInfo.json")
     private Resource showGameInfo;
     @RequestMapping(value = "/api/showGameInfo")
@@ -76,6 +88,8 @@ public class CityRestController {
         }
         return (JSONObject) JSON.parse(areaData);
     }
+
+
 
     @Value("classpath:json/getCommentList.json")
     private Resource getCommentList;
@@ -90,6 +104,8 @@ public class CityRestController {
         return (JSONObject) JSON.parse(areaData);
     }
 
+
+
     @Value("classpath:json/getInfoComment.json")
     private Resource getInfoComment;
     @RequestMapping(value = "/api/getInfoComment")
@@ -103,6 +119,8 @@ public class CityRestController {
         return (JSONObject) JSON.parse(areaData);
     }
 
+
+
     @Value("classpath:json/getStartAd.json")
     private Resource getStartAd;
     @RequestMapping(value = "/api/getStartAd")
@@ -115,6 +133,8 @@ public class CityRestController {
         }
         return (JSONObject) JSON.parse(areaData);
     }
+
+
 
     @Value("classpath:json/getActivity.json")
     private Resource getActivity;
@@ -130,6 +150,8 @@ public class CityRestController {
         return (JSONObject) JSON.parse(areaData);
     }
 
+
+
     @Value("classpath:json/sendCode.json")
     private Resource sendCode;
 
@@ -143,6 +165,8 @@ public class CityRestController {
         }
         return (JSONObject) JSON.parse(areaData);
     }
+
+
 
     @Value("classpath:json/appLogin.json")
     private Resource appLogin;
@@ -158,6 +182,8 @@ public class CityRestController {
         return (JSONObject) JSON.parse(areaData);
     }
 
+
+
     @Value("classpath:json/sharePage.json")
     private Resource sharePage;
 
@@ -172,6 +198,8 @@ public class CityRestController {
         return (JSONObject) JSON.parse(areaData);
     }
 
+
+
     @Value("classpath:json/getNewMoreGames.json")
     private Resource getNewMoreGames;
 
@@ -185,6 +213,8 @@ public class CityRestController {
         }
         return (JSONObject) JSON.parse(areaData);
     }
+
+
 
     @Value("classpath:json/getMoreGames.json")
     private Resource jsonResourcegetDownLists;
@@ -201,6 +231,7 @@ public class CityRestController {
     }
 
 
+
     @Value("classpath:json/getMoreGames.json")
     private Resource jsonResource;
 
@@ -209,6 +240,21 @@ public class CityRestController {
         String areaData = null;
         try {
             areaData = IOUtils.toString(jsonResource.getInputStream(), Charset.forName("UTF-8"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return (JSONObject) JSON.parse(areaData);
+    }
+
+
+    @Value("classpath:json/welcomeHome.json")
+    private Resource welcomeHome;
+
+    @RequestMapping(value = "/client.action")
+    public JSONObject welcomeHome() {
+        String areaData = null;
+        try {
+            areaData = IOUtils.toString(welcomeHome.getInputStream(), Charset.forName("UTF-8"));
         } catch (IOException e) {
             e.printStackTrace();
         }
