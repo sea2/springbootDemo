@@ -395,10 +395,10 @@ public class HttpUtil {
     }
 
 
-    private static String getParamString(Map<String, String[]> map) {
+    public static String getParamString(Map<String, String[]> map) {
         StringBuilder sb = new StringBuilder();
         for (Map.Entry<String, String[]> e : map.entrySet()) {
-            sb.append(e.getKey()).append("=");
+            sb.append(e.getKey()).append(":");
             String[] value = e.getValue();
             if (value != null && value.length == 1) {
                 sb.append(value[0]).append("\t");

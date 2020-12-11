@@ -28,6 +28,8 @@ public class StringUtils {
                 return false;
             }
         }
+
+
         return true;
     }
 
@@ -98,6 +100,9 @@ public class StringUtils {
         DecimalFormat df = new DecimalFormat("######0.00");
         return df.format(d);
     }
+
+
+
 
     /**
      *保留四位小数

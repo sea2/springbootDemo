@@ -61,4 +61,5 @@ public class BigDecimalUtils {
 		return b1.divide(b2, scale).doubleValue();
 	}
 
+
 }

@@ -3,6 +3,9 @@ package org.spring.springboot.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.io.IOUtils;
+import org.apache.ibatis.annotations.Param;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.spring.springboot.domain.City;
 import org.spring.springboot.service.CityService;
 import org.spring.springboot.util.JsonResourceUtils;
@@ -24,6 +27,51 @@ public class CityRestController {
 
     @Autowired
     private CityService cityService;
+    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
+
+
+    @ResponseBody
+    @RequestMapping(value = "/api/game_server", method = RequestMethod.GET)
+    public String getGameInfo23(@RequestParam("game_id") String game_id, @RequestParam("game_key") String game_key) {
+        String json;
+        if ((game_id.equals("xxyzapp_android") && game_key.equals("a8c46799d6"))||(game_id.equals("xxyzappcn") && game_key.equals("0f413dfbac"))) {
+            json = "{\"code\":\"0\",\"msg\":\"请求成功\",\"data\":[{\"area\":\"1\",\"name\":\"桃园结义\"},{\"area\":\"2\",\"name\":\"义薄云天\"},{\"area\":\"3\",\"name\":\"奇迹之夜\"}]}";
+        } else {
+            json = "{\"code\":\"-1\",\"msg\":\"参数错误\"}";
+
+        }
+
+        return json;
+    }
+
+
+
+    @ResponseBody
+    @RequestMapping(value = "/api/game_info", method = RequestMethod.GET)
+    public String getGameInfo(@RequestParam("area") String area, @RequestParam("role_id") String role_id) {
+        String json;
+        if (area.equals("1") || area.equals("2") || area.equals("3")) {
+            json = "{\"code\":\"0\",\"msg\":\"请求成功\",\"data\":{\"notify_url\":\"http://106.13.43.211:8080/api/callPay\",\"user_info\":{\"role_name\":\"呵呵笑\"},\"product_list\":[{\"product_id\":\"snxl6\",\"product_name\":\"$0.99\",\"money\":\"0.99\"},{\"product_id\":\"snxl30\",\"product_name\":\"$4.99\",\"money\":\"4.99\"}]}}";
+        } else {
+            json = "{\"code\":\"-1\",\"msg\":\"参数错误\"}";
+
+        }
+
+        return json;
+    }
+
+    @RequestMapping(value = "/api/callPay")
+    public String getGameInfo1() {
+        LOGGER.info("/api/callPay");
+        return "ok";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/api/status")
+    public String getstatus() {
+        LOGGER.info("/api/callPay");
+        return "{\"status\":1}";
+    }
 
 
     @RequestMapping(value = "/api/city/{id}", method = RequestMethod.GET)
@@ -32,19 +80,18 @@ public class CityRestController {
     }
 
 
-
     @RequestMapping(value = "/api/allCity", method = RequestMethod.GET)
     public List<City> findOneCity() {
         return cityService.findAllCity();
     }
 
 
-
     @RequestMapping(value = "/api/city", method = RequestMethod.POST)
     public void createCity(@RequestBody City city) {
+
+
         cityService.saveCity(city);
     }
-
 
 
     @RequestMapping(value = "/api/city", method = RequestMethod.PUT)
@@ -53,16 +100,15 @@ public class CityRestController {
     }
 
 
-
     @RequestMapping(value = "/api/city/{id}", method = RequestMethod.DELETE)
     public void modifyCity(@PathVariable("id") Long id) {
         cityService.deleteCity(id);
     }
 
 
-
     @Value("classpath:json/getNewIndex.json")
     private Resource getNewIndex;
+
     @RequestMapping(value = "/api/getNewIndex")
     public JSONObject getNewIndex() {
         String areaData = null;
@@ -75,9 +121,9 @@ public class CityRestController {
     }
 
 
-
     @Value("classpath:json/showGameInfo.json")
     private Resource showGameInfo;
+
     @RequestMapping(value = "/api/showGameInfo")
     public JSONObject showGameInfo() {
         String areaData = null;
@@ -90,9 +136,9 @@ public class CityRestController {
     }
 
 
-
     @Value("classpath:json/getCommentList.json")
     private Resource getCommentList;
+
     @RequestMapping(value = "/api/getCommentList")
     public JSONObject getCommentList() {
         String areaData = null;
@@ -105,9 +151,9 @@ public class CityRestController {
     }
 
 
-
     @Value("classpath:json/getInfoComment.json")
     private Resource getInfoComment;
+
     @RequestMapping(value = "/api/getInfoComment")
     public JSONObject getInfoComment() {
         String areaData = null;
@@ -120,9 +166,9 @@ public class CityRestController {
     }
 
 
-
     @Value("classpath:json/getStartAd.json")
     private Resource getStartAd;
+
     @RequestMapping(value = "/api/getStartAd")
     public JSONObject getStartAd() {
         String areaData = null;
@@ -133,7 +179,6 @@ public class CityRestController {
         }
         return (JSONObject) JSON.parse(areaData);
     }
-
 
 
     @Value("classpath:json/getActivity.json")
@@ -151,7 +196,6 @@ public class CityRestController {
     }
 
 
-
     @Value("classpath:json/sendCode.json")
     private Resource sendCode;
 
@@ -165,7 +209,6 @@ public class CityRestController {
         }
         return (JSONObject) JSON.parse(areaData);
     }
-
 
 
     @Value("classpath:json/appLogin.json")
@@ -183,7 +226,6 @@ public class CityRestController {
     }
 
 
-
     @Value("classpath:json/sharePage.json")
     private Resource sharePage;
 
@@ -197,7 +239,6 @@ public class CityRestController {
         }
         return (JSONObject) JSON.parse(areaData);
     }
-
 
 
     @Value("classpath:json/getNewMoreGames.json")
@@ -215,7 +256,6 @@ public class CityRestController {
     }
 
 
-
     @Value("classpath:json/getMoreGames.json")
     private Resource jsonResourcegetDownLists;
 
@@ -229,7 +269,6 @@ public class CityRestController {
         }
         return (JSONObject) JSON.parse(areaData);
     }
-
 
 
     @Value("classpath:json/getMoreGames.json")

@@ -24,6 +24,7 @@ public class ResultBody<T> {
     public ResultBody(ErrorInfoInterface errorInfo) {
         this.code = errorInfo.getCode();
         this.message = errorInfo.getMessage();
+
     }
 
     public ResultBody(T result) {

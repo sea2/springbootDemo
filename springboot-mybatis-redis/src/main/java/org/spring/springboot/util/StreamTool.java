@@ -12,7 +12,7 @@ public class StreamTool {
      */
     public static byte[] readInputStream(InputStream inStream) throws Exception{
         ByteArrayOutputStream outStream = new ByteArrayOutputStream();
-        byte[] buffer = new byte[1024];
+        byte[] buffer = new byte[2048];
         int len = 0;
         while( (len = inStream.read(buffer)) !=-1 ){
             outStream.write(buffer, 0, len);
@@ -22,4 +22,6 @@ public class StreamTool {
         inStream.close();
         return data;
     }
+
+
 }

@@ -50,6 +50,8 @@ public class DateUtils {
     public static String getCurrentSqlTimestampString() {
         Date today = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat(DEFUALT_TIMESTAMPE_FORMAT);
+
+
         return sdf.format(today);
     }
 

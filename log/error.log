@@ -1,0 +1,64 @@
+2020-12-03 17:05:59,824 ERROR [http-nio-8080-exec-2] o.s.s.interceptor.MyInterceptor [MyInterceptor.java : 40] test----------------------------------------------------
+2020-12-03 17:11:15,160 ERROR [http-nio-8080-exec-1] o.s.s.interceptor.MyInterceptor [MyInterceptor.java : 40] test----------------------------------------------------
+2020-12-03 17:14:29,812 ERROR [http-nio-8080-exec-5] o.s.s.interceptor.MyInterceptor [MyInterceptor.java : 40] test----------------------------------------------------
+2020-12-03 17:16:20,051 ERROR [main] o.s.boot.SpringApplication [SpringApplication.java : 815] Application startup failed
+java.lang.IllegalStateException: java.lang.IllegalStateException: Logback configuration error detected: 
+ERROR in ch.qos.logback.core.rolling.RollingFileAppender[info_file] - No encoder set for the appender named "info_file".
+	at org.springframework.boot.logging.LoggingApplicationListener.initializeSystem(LoggingApplicationListener.java:315)
+	at org.springframework.boot.logging.LoggingApplicationListener.initialize(LoggingApplicationListener.java:276)
+	at org.springframework.boot.logging.LoggingApplicationListener.onApplicationEnvironmentPreparedEvent(LoggingApplicationListener.java:239)
+	at org.springframework.boot.logging.LoggingApplicationListener.onApplicationEvent(LoggingApplicationListener.java:212)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:167)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:139)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:122)
+	at org.springframework.boot.context.event.EventPublishingRunListener.environmentPrepared(EventPublishingRunListener.java:73)
+	at org.springframework.boot.SpringApplicationRunListeners.environmentPrepared(SpringApplicationRunListeners.java:54)
+	at org.springframework.boot.SpringApplication.prepareEnvironment(SpringApplication.java:336)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1162)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1151)
+	at org.spring.springboot.Application.main(Application.java:26)
+Caused by: java.lang.IllegalStateException: Logback configuration error detected: 
+ERROR in ch.qos.logback.core.rolling.RollingFileAppender[info_file] - No encoder set for the appender named "info_file".
+	at org.springframework.boot.logging.logback.LogbackLoggingSystem.loadConfiguration(LogbackLoggingSystem.java:161)
+	at org.springframework.boot.logging.AbstractLoggingSystem.initializeWithSpecificConfig(AbstractLoggingSystem.java:66)
+	at org.springframework.boot.logging.AbstractLoggingSystem.initialize(AbstractLoggingSystem.java:56)
+	at org.springframework.boot.logging.logback.LogbackLoggingSystem.initialize(LogbackLoggingSystem.java:114)
+	at org.springframework.boot.logging.LoggingApplicationListener.initializeSystem(LoggingApplicationListener.java:308)
+	... 13 common frames omitted
+2020-12-03 17:17:03,290 ERROR [main] o.s.boot.SpringApplication [SpringApplication.java : 815] Application startup failed
+java.lang.IllegalStateException: java.lang.IllegalStateException: Logback configuration error detected: 
+ERROR in ch.qos.logback.classic.PatternLayout("null") - Empty or null pattern.
+	at org.springframework.boot.logging.LoggingApplicationListener.initializeSystem(LoggingApplicationListener.java:315)
+	at org.springframework.boot.logging.LoggingApplicationListener.initialize(LoggingApplicationListener.java:276)
+	at org.springframework.boot.logging.LoggingApplicationListener.onApplicationEnvironmentPreparedEvent(LoggingApplicationListener.java:239)
+	at org.springframework.boot.logging.LoggingApplicationListener.onApplicationEvent(LoggingApplicationListener.java:212)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:167)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:139)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:122)
+	at org.springframework.boot.context.event.EventPublishingRunListener.environmentPrepared(EventPublishingRunListener.java:73)
+	at org.springframework.boot.SpringApplicationRunListeners.environmentPrepared(SpringApplicationRunListeners.java:54)
+	at org.springframework.boot.SpringApplication.prepareEnvironment(SpringApplication.java:336)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1162)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1151)
+	at org.spring.springboot.Application.main(Application.java:26)
+Caused by: java.lang.IllegalStateException: Logback configuration error detected: 
+ERROR in ch.qos.logback.classic.PatternLayout("null") - Empty or null pattern.
+	at org.springframework.boot.logging.logback.LogbackLoggingSystem.loadConfiguration(LogbackLoggingSystem.java:161)
+	at org.springframework.boot.logging.AbstractLoggingSystem.initializeWithSpecificConfig(AbstractLoggingSystem.java:66)
+	at org.springframework.boot.logging.AbstractLoggingSystem.initialize(AbstractLoggingSystem.java:56)
+	at org.springframework.boot.logging.logback.LogbackLoggingSystem.initialize(LogbackLoggingSystem.java:114)
+	at org.springframework.boot.logging.LoggingApplicationListener.initializeSystem(LoggingApplicationListener.java:308)
+	... 13 common frames omitted
+2020-12-03 17:18:13,933 ERROR [http-nio-8080-exec-2] o.s.s.interceptor.MyInterceptor [MyInterceptor.java : 40] test----------------------------------------------------
+2020-12-03 17:22:05,910 ERROR [http-nio-8080-exec-1] o.s.s.interceptor.MyInterceptor [MyInterceptor.java : 40] test----------------------------------------------------
+2020-12-03 17:22:54,562 ERROR [http-nio-8080-exec-2] o.s.s.interceptor.MyInterceptor [MyInterceptor.java : 40] test----------------------------------------------------
+2020-12-03 17:23:35,716 ERROR [http-nio-8080-exec-3] o.s.s.interceptor.MyInterceptor [MyInterceptor.java : 40] test----------------------------------------------------
+2020-12-03 17:24:10,310 ERROR [http-nio-8080-exec-4] o.s.s.interceptor.MyInterceptor [MyInterceptor.java : 40] test----------------------------------------------------
+2020-12-03 17:26:15,369 ERROR [http-nio-8080-exec-2] o.s.s.interceptor.MyInterceptor [MyInterceptor.java : 40] test----------------------------------------------------
+2020-12-03 17:26:50,904 ERROR [http-nio-8080-exec-3] o.s.s.interceptor.MyInterceptor [MyInterceptor.java : 40] test----------------------------------------------------
+2020-12-03 17:26:50,933 ERROR [http-nio-8080-exec-3] o.s.s.interceptor.MyInterceptor [MyInterceptor.java : 40] test----------------------------------------------------
+2020-12-03 17:27:10,405 ERROR [http-nio-8080-exec-5] o.s.s.interceptor.MyInterceptor [MyInterceptor.java : 40] test----------------------------------------------------
+2020-12-03 17:27:41,306 ERROR [http-nio-8080-exec-6] o.s.s.interceptor.MyInterceptor [MyInterceptor.java : 40] test----------------------------------------------------
+2020-12-01 18:02:31,088 ERROR [http-nio-8080-exec-2] o.s.s.interceptor.MyInterceptor [MyInterceptor.java : 40] test----------------------------------------------------
