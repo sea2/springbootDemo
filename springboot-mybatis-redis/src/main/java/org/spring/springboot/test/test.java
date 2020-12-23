@@ -50,11 +50,6 @@ public class test {
         }
 
 
-        List<String> list = new ArrayList<String>();
-        list.add("2");
-        list.remove("1");
-
-
 
     }
 

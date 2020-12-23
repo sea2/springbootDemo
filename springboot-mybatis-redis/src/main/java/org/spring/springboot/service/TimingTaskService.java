@@ -59,9 +59,6 @@ public class TimingTaskService {
 
 
     private void testSleep(int id) {
-
-
-
         try {
             Thread.sleep(5000);
             System.out.println(id+"定时任务启动 每五秒执行一次" + new Date());
@@ -69,6 +66,10 @@ public class TimingTaskService {
             e.printStackTrace();
         }
     }
+
+
+
+
 
 
 }

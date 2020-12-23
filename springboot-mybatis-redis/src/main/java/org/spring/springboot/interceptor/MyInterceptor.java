@@ -37,7 +37,6 @@ public class MyInterceptor implements HandlerInterceptor {
                     IpUtil.getIp(request), sdf.format(new Date()), request.getMethod(), request.getRequestURI(),
                     HttpUtil.getParamString(request.getParameterMap()) , request.getHeader("user-agent"));
         }
-        LOGGER.error("test----------------------------------------------------");
         return true; // 是否调用后续方法（controller接口方法、postHandle、afterCompletion）
     }
 
