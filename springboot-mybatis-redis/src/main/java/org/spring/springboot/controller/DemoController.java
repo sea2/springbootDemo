@@ -1,9 +1,6 @@
 package org.spring.springboot.controller;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBObject;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.poi.ss.usermodel.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.spring.springboot.constant.CityErrorInfoEnum;
@@ -14,11 +11,7 @@ import org.spring.springboot.result.GlobalErrorInfoException;
 import org.spring.springboot.result.ResultBody;
 import org.spring.springboot.service.impl.AsyncTaskImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.aggregation.Aggregation;
-import org.springframework.data.mongodb.core.aggregation.AggregationResults;
-import org.springframework.data.mongodb.core.aggregation.TypedAggregation;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.util.StringUtils;
@@ -27,8 +20,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 
@@ -41,7 +32,6 @@ import java.util.*;
 @Slf4j
 public class DemoController {
 
-    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
     @Resource
     private AsyncTaskImpl asyncTask;
