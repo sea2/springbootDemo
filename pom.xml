@@ -9,49 +9,49 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<!-- 基础 – 入门篇 -->
-		<!-- Spring Boot 之配置文件详解 -->
-		<module>springboot-properties</module>
-		<!-- Spring Boot 之配置注解使用 -->
-		<module>springboot-configuration</module>
+		<!--&lt;!&ndash; 基础 – 入门篇 &ndash;&gt;-->
+		<!--&lt;!&ndash; Spring Boot 之配置文件详解 &ndash;&gt;-->
+		<!--<module>springboot-properties</module>-->
+		<!--&lt;!&ndash; Spring Boot 之配置注解使用 &ndash;&gt;-->
+		<!--<module>springboot-configuration</module>-->
 
-		<!-- 基础 - Web 业务开发篇 -->
-		<!-- Spring Boot HTTP over JSON 的错误码异常处理 -->
-		<module>springboot-validation-over-json</module>
+		<!--&lt;!&ndash; 基础 - Web 业务开发篇 &ndash;&gt;-->
+		<!--&lt;!&ndash; Spring Boot HTTP over JSON 的错误码异常处理 &ndash;&gt;-->
+		<!--<module>springboot-validation-over-json</module>-->
 
-		<!-- 基础 – 数据存储篇 -->
-		<!-- Spring Boot 整合 Mybatis Annotation 注解案例 -->
-		<module>springboot-mybatis-annotation</module>
-		<!-- Spring Boot 整合 Mybatis 实现 Druid 多数据源配置 -->
-		<module>springboot-mybatis-mutil-datasource</module>
+		<!--&lt;!&ndash; 基础 – 数据存储篇 &ndash;&gt;-->
+		<!--&lt;!&ndash; Spring Boot 整合 Mybatis Annotation 注解案例 &ndash;&gt;-->
+		<!--<module>springboot-mybatis-annotation</module>-->
+		<!--&lt;!&ndash; Spring Boot 整合 Mybatis 实现 Druid 多数据源配置 &ndash;&gt;-->
+		<!--<module>springboot-mybatis-mutil-datasource</module>-->
 
-		<!-- 基础 – 数据缓存篇 -->
-		<!-- Spring Boot 整合 Redis 实现缓存 -->
+		<!--&lt;!&ndash; 基础 – 数据缓存篇 &ndash;&gt;-->
+		<!--&lt;!&ndash; Spring Boot 整合 Redis 实现缓存 &ndash;&gt;-->
+		<!--<module>springboot-mybatis-redis</module>-->
+
+		<!--&lt;!&ndash; 基础 – 应用篇 &ndash;&gt;-->
+		<!--&lt;!&ndash; Spring Boot Actuator 监控-->
+		<!--<module>springboot-actuator</module>&ndash;&gt;-->
+
+		<!--&lt;!&ndash; 其他篇 &ndash;&gt;-->
+		<!--&lt;!&ndash; Spring Boot 整合 Dubbo/ZooKeeper 详解 SOA 案例 &ndash;&gt;-->
+		<!--<module>springboot-dubbo-server</module>-->
+		<!--<module>springboot-dubbo-client</module>-->
+		<!--&lt;!&ndash; Spring Boot 整合 Elasticsearch &ndash;&gt;-->
+		<!--<module>springboot-elasticsearch</module>-->
+
+		<!--&lt;!&ndash; Spring Data ES 篇 &ndash;&gt;-->
+		<!--<module>spring-data-elasticsearch-crud</module>-->
+		<!--<module>spring-data-elasticsearch-query</module>-->
+
+		<!--&lt;!&ndash; 第二章快速入门案例 &ndash;&gt;-->
+		<!--<module>chapter-2-spring-boot-quick-start</module>-->
+		<!--&lt;!&ndash; 第四章表单校验案例 &ndash;&gt;-->
+		<!--<module>chapter-4-spring-boot-validating-form-input</module>-->
+		<!--&lt;!&ndash; 第五章数据分页排序案例 &ndash;&gt;-->
+		<!--<module>chapter-5-spring-boot-paging-sorting</module>-->
+		<!--<module>mode-jar</module>-->
 		<module>springboot-mybatis-redis</module>
-
-		<!-- 基础 – 应用篇 -->
-		<!-- Spring Boot Actuator 监控
-		<module>springboot-actuator</module>-->
-
-		<!-- 其他篇 -->
-		<!-- Spring Boot 整合 Dubbo/ZooKeeper 详解 SOA 案例 -->
-		<module>springboot-dubbo-server</module>
-		<module>springboot-dubbo-client</module>
-		<!-- Spring Boot 整合 Elasticsearch -->
-		<module>springboot-elasticsearch</module>
-
-		<!-- Spring Data ES 篇 -->
-		<module>spring-data-elasticsearch-crud</module>
-		<module>spring-data-elasticsearch-query</module>
-
-		<!-- 第二章快速入门案例 -->
-		<module>chapter-2-spring-boot-quick-start</module>
-		<!-- 第四章表单校验案例 -->
-		<module>chapter-4-spring-boot-validating-form-input</module>
-		<!-- 第五章数据分页排序案例 -->
-		<module>chapter-5-spring-boot-paging-sorting</module>
-		<module>mode-jar</module>
-
 	</modules>
 
 </project>

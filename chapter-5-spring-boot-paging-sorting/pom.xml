@@ -6,7 +6,7 @@
     <groupId>spring.boot.core</groupId>
     <artifactId>chapter-5-spring-boot-paging-sorting</artifactId>
     <version>0.0.1-SNAPSHOT</version>
- 
+
     <packaging>pom</packaging>
 
     <name>chapter-5-spring-boot-paging-sorting</name>
