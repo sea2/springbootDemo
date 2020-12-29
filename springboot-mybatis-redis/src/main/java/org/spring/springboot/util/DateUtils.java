@@ -1,6 +1,5 @@
 package org.spring.springboot.util;
 
-import com.sun.jmx.snmp.Timestamp;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -66,30 +65,6 @@ public class DateUtils {
         return sdf.format(today);
     }
 
-    /**
-     * 将传入的时间转换为指定时间格式字符串.
-     *
-     * @param time       传入时间
-     * @param dateFormat 时间格式
-     * @return 时间字符串
-     */
-    public static String formatTimeStamp(Timestamp time, String dateFormat) {
-        if (time == null) {
-            return "";
-        }
-
-        SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
-        return sdf.format(time);
-    }
-
-    /**
-     * 取得现在时间.
-     *
-     * @return 现在时间
-     */
-    public static Timestamp getCurrentSqlTimestamp() {
-        return new Timestamp(System.currentTimeMillis());
-    }
 
     /**
      * 取得今天日期字符串.
@@ -113,19 +88,7 @@ public class DateUtils {
         return sdf.format(today);
     }
 
-    /**
-     * 将传入的时间转换为默认时间格式字符串.
-     *
-     * @param time 传入时间
-     * @return 时间字符串
-     */
-    public static String formatTimeStampDefualt(Timestamp time) {
-        if (time == null) {
-            return "";
-        }
-        SimpleDateFormat sdf = new SimpleDateFormat(DEFUALT_TIMESTAMPE_FORMAT);
-        return sdf.format(time);
-    }
+  
 
     /**
      * 将传入日期转换为默认格式字符串.
