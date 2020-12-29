@@ -86,6 +86,15 @@ public class DemoController {
     }
 
 
+    @RequestMapping(value = "/api/testAdd")
+    public ResultBody testAdd() throws GlobalErrorInfoException {
+
+        String str = "测试新增接口";
+
+        return new ResultBody<>(str);
+    }
+
+
     @Autowired
     private MongoTemplate mongoTemplate;
     @Resource
