@@ -86,7 +86,7 @@ public class DemoController {
     }
 
 
-    @RequestMapping(value = "/api/testAdd")
+    @RequestMapping(value = "/api/testAdd1")
     public ResultBody testAdd() throws GlobalErrorInfoException {
 
         String str = "测试新增接口";
