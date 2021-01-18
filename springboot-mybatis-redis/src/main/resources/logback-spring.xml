@@ -27,6 +27,8 @@
             <fileNamePattern>${path}/debug.log.%d{yyyy-MM-dd}-%i.zip</fileNamePattern>
             <maxHistory>${maxHistory}</maxHistory>
             <timeBasedFileNamingAndTriggeringPolicy
+
+
                     class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>${maxFileSize}</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
@@ -41,6 +43,9 @@
             <onMismatch>DENY</onMismatch>
         </filter>
     </appender>
+
+
+
 
     <appender name="info_file" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${path}/info.log</file>

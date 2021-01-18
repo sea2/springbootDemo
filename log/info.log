@@ -1,4 +1,33 @@
-2020-12-29 10:24:42,479 INFO [http-nio-8080-exec-7] o.s.s.interceptor.MyInterceptor [MyInterceptor.java : 36] Request Info: [IP = 127.0.0.1] , [Time = 2020-12-29 10:24:42 478] , [Method = GET] , [URI = /api/mongoTest] ,[Params = {data:20201227	}],[userAgent = Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:84.0) Gecko/20100101 Firefox/84.0] 
-2020-12-29 10:24:54,184 INFO [http-nio-8080-exec-7] o.s.s.i.LogResponseBodyAdvice [LogResponseBodyAdvice.java : 26] DemoController.mongoTest,url=http://localhost:8080/api/mongoTest?data=20201227,result={"code":"0","message":"success","result":{"gaid活跃":48,"gaid新增":7,"设备号新增":7,"激活打点次数":102,"设备号活跃":50}}
-2020-12-29 11:27:40,558 INFO [http-nio-8080-exec-9] o.s.s.interceptor.MyInterceptor [MyInterceptor.java : 36] Request Info: [IP = 127.0.0.1] , [Time = 2020-12-29 11:27:40 558] , [Method = GET] , [URI = /api/mongoTest] ,[Params = {data:20201227	}],[userAgent = Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:84.0) Gecko/20100101 Firefox/84.0] 
-2020-12-29 11:27:52,344 INFO [http-nio-8080-exec-9] o.s.s.i.LogResponseBodyAdvice [LogResponseBodyAdvice.java : 26] DemoController.mongoTest,url=http://localhost:8080/api/mongoTest?data=20201227,result={"code":"0","message":"success","result":{"gaid活跃":48,"gaid新增":7,"设备号新增":7,"激活打点次数":102,"设备号活跃":50}}
+2021-01-13 09:38:57,356 INFO [cluster-ClusterId{value='5fec417ce02eab1f88a8b870', description='null'}-47.56.58.171:3717] org.mongodb.driver.cluster [SLF4JLogger.java : 76] Exception in monitor thread while connecting to server 47.56.58.171:3717
+com.mongodb.MongoSecurityException: Exception authenticating MongoCredential{mechanism=null, userName='root', source='admin', password=<hidden>, mechanismProperties={}}
+	at com.mongodb.connection.SaslAuthenticator.wrapInMongoSecurityException(SaslAuthenticator.java:157)
+	at com.mongodb.connection.SaslAuthenticator.access$200(SaslAuthenticator.java:37)
+	at com.mongodb.connection.SaslAuthenticator$1.run(SaslAuthenticator.java:66)
+	at com.mongodb.connection.SaslAuthenticator$1.run(SaslAuthenticator.java:44)
+	at com.mongodb.connection.SaslAuthenticator.doAsSubject(SaslAuthenticator.java:162)
+	at com.mongodb.connection.SaslAuthenticator.authenticate(SaslAuthenticator.java:44)
+	at com.mongodb.connection.DefaultAuthenticator.authenticate(DefaultAuthenticator.java:32)
+	at com.mongodb.connection.InternalStreamConnectionInitializer.authenticateAll(InternalStreamConnectionInitializer.java:109)
+	at com.mongodb.connection.InternalStreamConnectionInitializer.initialize(InternalStreamConnectionInitializer.java:46)
+	at com.mongodb.connection.InternalStreamConnection.open(InternalStreamConnection.java:116)
+	at com.mongodb.connection.DefaultServerMonitor$ServerMonitorRunnable.run(DefaultServerMonitor.java:127)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: com.mongodb.MongoSocketReadException: Exception receiving message
+	at com.mongodb.connection.InternalStreamConnection.translateReadException(InternalStreamConnection.java:483)
+	at com.mongodb.connection.InternalStreamConnection.receiveMessage(InternalStreamConnection.java:228)
+	at com.mongodb.connection.CommandHelper.receiveReply(CommandHelper.java:134)
+	at com.mongodb.connection.CommandHelper.receiveCommandResult(CommandHelper.java:121)
+	at com.mongodb.connection.CommandHelper.executeCommand(CommandHelper.java:32)
+	at com.mongodb.connection.SaslAuthenticator.sendSaslStart(SaslAuthenticator.java:117)
+	at com.mongodb.connection.SaslAuthenticator.access$000(SaslAuthenticator.java:37)
+	at com.mongodb.connection.SaslAuthenticator$1.run(SaslAuthenticator.java:50)
+	... 9 common frames omitted
+Caused by: java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:210)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at com.mongodb.connection.SocketStream.read(SocketStream.java:85)
+	at com.mongodb.connection.InternalStreamConnection.receiveResponseBuffers(InternalStreamConnection.java:494)
+	at com.mongodb.connection.InternalStreamConnection.receiveMessage(InternalStreamConnection.java:224)
+	... 15 common frames omitted
+2021-01-13 09:41:05,491 INFO [cluster-ClusterId{value='5fec417ce02eab1f88a8b870', description='null'}-47.56.58.171:3717] org.mongodb.driver.connection [SLF4JLogger.java : 71] Opened connection [connectionId{localValue:2729, serverValue:35538052}] to 47.56.58.171:3717
+2021-01-13 09:41:05,533 INFO [cluster-ClusterId{value='5fec417ce02eab1f88a8b870', description='null'}-47.56.58.171:3717] org.mongodb.driver.cluster [SLF4JLogger.java : 71] Monitor thread successfully connected to server with description ServerDescription{address=47.56.58.171:3717, type=REPLICA_SET_SECONDARY, state=CONNECTED, ok=true, version=ServerVersion{versionList=[4, 2, 1]}, minWireVersion=0, maxWireVersion=8, maxDocumentSize=16777216, roundTripTimeNanos=41314800, setName='mgset-27025925', canonicalAddress=47.56.58.171:3717, hosts=[47.52.185.117:3717, 47.56.58.171:3717], passives=[], arbiters=[], primary='null', tagSet=TagSet{[]}, electionId=null, setVersion=1, lastWriteDate=Wed Jan 13 09:41:06 CST 2021, lastUpdateTimeNanos=2574774700032600}
