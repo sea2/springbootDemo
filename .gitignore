@@ -37,3 +37,4 @@ dist/
 nbdist/
 .nb-gradle/
 .idea/
+log/

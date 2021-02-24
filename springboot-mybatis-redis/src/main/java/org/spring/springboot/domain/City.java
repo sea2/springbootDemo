@@ -1,5 +1,7 @@
 package org.spring.springboot.domain;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import java.io.Serializable;
 
 /**
@@ -7,10 +9,15 @@ import java.io.Serializable;
  *
  * Created by bysocket on 07/02/2017.
  */
+
+
 public class City implements Serializable {
 
-    private static final long serialVersionUID = -1L;
+    private static final long serialVersionUID = -934073895746700367L;
 
+
+    public City() {
+    }
     /**
      * 城市编号
      */
@@ -25,6 +32,7 @@ public class City implements Serializable {
      * 城市名称
      */
     private String cityName;
+
 
     /**
      * 描述
@@ -70,6 +78,8 @@ public class City implements Serializable {
         this.cityName = cityName;
         this.description = description;
     }
+
+
 
 
 

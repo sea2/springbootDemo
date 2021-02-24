@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.spring.springboot.dao.CityDao;
 import org.spring.springboot.domain.City;
 import org.spring.springboot.service.CityService;
+import org.spring.springboot.util.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
@@ -29,6 +30,8 @@ public class CityServiceImpl implements CityService {
     @Autowired
     private RedisTemplate redisTemplate;
 
+    @Autowired
+    RedisUtil redisUtil;
     /**
      * 获取城市逻辑：
      * 如果缓存存在，从缓存中获取城市信息
@@ -37,12 +40,11 @@ public class CityServiceImpl implements CityService {
     public City findCityById(Long id) {
         // 从缓存中获取城市信息
         String key = "city_" + id;
-        ValueOperations<String, City> operations = redisTemplate.opsForValue();
 
         // 缓存存在
-        boolean hasKey = redisTemplate.hasKey(key);
+        boolean hasKey =redisUtil.exists(key);
         if (hasKey) {
-            City city = operations.get(key);
+            City city = (City) redisUtil.get(key);
 
             LOGGER.info("CityServiceImpl.findCityById() : 从缓存中获取了城市 >> " + city.toString());
             return city;
@@ -52,7 +54,7 @@ public class CityServiceImpl implements CityService {
         City city = cityDao.findById(id);
 
         // 插入缓存
-        operations.set(key, city, 10, TimeUnit.SECONDS);
+        redisUtil.set(key, city);
         LOGGER.info("CityServiceImpl.findCityById() : 城市插入缓存 >> " + city.toString());
 
         return city;
