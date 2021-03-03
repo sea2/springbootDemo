@@ -98,8 +98,6 @@ public class CityServiceImpl implements CityService {
         Long ret = cityDao.deleteCity(id);
 
 
-
-
         // 缓存存在，删除缓存
         String key = "city_" + id;
         boolean hasKey = redisTemplate.hasKey(key);

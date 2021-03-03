@@ -84,8 +84,9 @@ public class DemoController {
     public ResultBody asyncTask() throws GlobalErrorInfoException {
 
         String str = "任务开始执行";
-        asyncTask.asyncTask0();
-
+        for (int i = 0; i < 10; i++) {
+            asyncTask.asyncTask0();
+        }
         return new ResultBody<>(str);
     }
 

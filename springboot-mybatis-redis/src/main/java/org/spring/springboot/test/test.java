@@ -22,10 +22,9 @@ public class test {
             JSONArray array2 = js.getJSONArray("game");
 
             for (int i = 0; i < array1.length(); i++) {
-
                 System.out.println("<script type=\"text/javascript\" src=\"" + array1.get(i) + "\"></script>\n");
-
             }
+
             for (int i = 0; i < array2.length(); i++) {
 
                 System.out.println("<script type=\"text/javascript\" src=\"" + array2.get(i) + "\"></script>\n");
