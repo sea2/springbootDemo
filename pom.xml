@@ -53,5 +53,4 @@
 		<!--<module>mode-jar</module>-->
 		<module>springboot-mybatis-redis</module>
 	</modules>
-
 </project>

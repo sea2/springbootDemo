@@ -10,6 +10,7 @@ import org.spring.springboot.repository.ActivationRepository;
 import org.spring.springboot.result.GlobalErrorInfoException;
 import org.spring.springboot.result.ResultBody;
 import org.spring.springboot.service.impl.AsyncTaskImpl;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -39,7 +40,8 @@ public class DemoController {
 
     @Resource
     private AsyncTaskImpl asyncTask;
-
+    @Autowired
+    RabbitTemplate rabbitTemplate;
 
     /**
      * 获取城市接口
@@ -100,6 +102,16 @@ public class DemoController {
     }
 
 
+    @RequestMapping(value = "/api/rabbitTest")
+    public ResultBody rabbitTest() throws GlobalErrorInfoException {
+        for (int i = 0; i < 100; i++) {
+            rabbitTemplate.convertAndSend("immediate_exchange_test1", "immediate_routing_key_test1", "消息rabbitMQ"+i);
+        }
+
+        return new ResultBody<>("");
+    }
+
+
     @RequestMapping(value = "/api/getJarDirectory")
     public ResultBody getJarDirectory() throws GlobalErrorInfoException {
 
@@ -126,9 +138,8 @@ public class DemoController {
                 }
             }
         }
-        return new ResultBody<>(file2.getAbsolutePath()+""+sbf.toString());
+        return new ResultBody<>(file2.getAbsolutePath() + "" + sbf.toString());
     }
-
 
 
     @Autowired
@@ -152,8 +163,8 @@ public class DemoController {
 
         List<ActivationRecordPO> listDeviceIdNew = new ArrayList<>();
         List<ActivationRecordPO> listGaidNew = new ArrayList<>();
-       long deviceCount=0;
-       long gaidCount=0;
+        long deviceCount = 0;
+        long gaidCount = 0;
         for (ActivationRecordPO po : list) {
             boolean isHas = false;
             boolean isHas2 = false;
@@ -182,14 +193,14 @@ public class DemoController {
             if (!StringUtils.isEmpty(po.getDevice_id())) {
                 Query queryAdd = new Query(Criteria.where("create_time").lte(startTime)).addCriteria(Criteria.where("device_id").is(po.getDevice_id()));
                 List<ActivationRecordPO> listAdd = mongoTemplate.find(queryAdd, ActivationRecordPO.class);
-                if(listAdd.size()==0){
+                if (listAdd.size() == 0) {
                     deviceCount++;
                 }
             }
             if (!StringUtils.isEmpty(po.getGa_id())) {
                 Query queryAdd = new Query(Criteria.where("create_time").lte(startTime)).addCriteria(Criteria.where("ga_id").is(po.getGa_id()));
                 List<ActivationRecordPO> listAdd = mongoTemplate.find(queryAdd, ActivationRecordPO.class);
-                if(listAdd.size()==0){
+                if (listAdd.size() == 0) {
                     gaidCount++;
                 }
             }

@@ -20,18 +20,24 @@ public class AsyncConfig implements AsyncConfigurer {
 
     public Executor getAsyncExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        executor.setCorePoolSize(1);
-        executor.setMaxPoolSize(2);
-        executor.setQueueCapacity(2);
+
+        //核心线程数目
+        executor.setCorePoolSize(50);
+        //指定最大线程数
+        executor.setMaxPoolSize(400);
+        //队列中最大的数目
+        executor.setQueueCapacity(400);
+        //线程名称前缀
         executor.setThreadNamePrefix("AsyncThread-");
-        /**
-         * ThreadPoolExecutor.AbortPolicy:丢弃任务并抛出RejectedExecutionException异常。 默认策略
-         * ThreadPoolExecutor.DiscardPolicy：也是丢弃任务，但是不抛出异常。 
-         * ThreadPoolExecutor.DiscardOldestPolicy：丢弃队列最前面的任务，然后重新尝试执行任务（重复此过程） 
-         * ThreadPoolExecutor.CallerRunsPolicy：由调用线程处理该任务
-         */
-        executor.setRejectedExecutionHandler(new ThreadPoolExecutor.DiscardPolicy());
-        executor.initialize(); //如果不初始化，导致找到不到执行器
+        //rejection-policy：当pool已经达到max size的时候，如何处理新任务
+        //CALLER_RUNS：不在新线程中执行任务，而是由调用者所在的线程来执行
+        //对拒绝task的处理策略
+        executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
+        //线程空闲后的最大存活时间
+        executor.setKeepAliveSeconds(60);
+
+        //加载，如果不初始化，导致找到不到执行器
+        executor.initialize();
         return executor;
     }
 
