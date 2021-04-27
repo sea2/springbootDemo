@@ -20,16 +20,12 @@ public class AsyncTaskImpl {
     public void asyncTask0() {
         log.info("返回值为void的异步调用开始" + Thread.currentThread().getName());
         try {
-            Thread.sleep(3000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         log.info("返回值为void的异步调用结束" + Thread.currentThread().getName());
     }
-
-
-
-
 
 
 }

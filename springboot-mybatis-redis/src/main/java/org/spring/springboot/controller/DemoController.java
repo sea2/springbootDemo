@@ -86,7 +86,7 @@ public class DemoController {
     public ResultBody asyncTask() throws GlobalErrorInfoException {
 
         String str = "任务开始执行";
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 1000; i++) {
             asyncTask.asyncTask0();
         }
         return new ResultBody<>(str);
@@ -215,6 +215,17 @@ public class DemoController {
         tm.put("设备号新增", deviceCount);
         return new ResultBody<>(tm);
     }
+
+
+
+    @RequestMapping(value = "/api/sleep")
+    public ResultBody sleep() throws GlobalErrorInfoException, InterruptedException {
+
+       Thread.sleep(10000);
+
+        return new ResultBody<>("ok");
+    }
+
 
 
 }

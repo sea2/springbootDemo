@@ -40,9 +40,9 @@ public class TimingTaskService {
     ExecutorService service = Executors.newFixedThreadPool(3);
 
     /**
-     * 每五秒执行一次
+     * 每60秒执行一次
      */
-    @Scheduled(cron = "0/5 * * * * ?")
+    @Scheduled(cron = "0/60 * * * * ?")
     public void executeFileDownLoadTask() {
 
         service.execute(new Runnable() {
@@ -64,10 +64,12 @@ public class TimingTaskService {
     private void testSleep(int id) {
         try {
             Thread.sleep(5000);
-            System.out.println(id+"定时任务启动 每五秒执行一次" + new Date());
+            System.out.println(id+"定时任务启动 每60秒执行一次" + new Date());
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+
     }
 
 

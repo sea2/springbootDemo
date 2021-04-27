@@ -1,8 +1,6 @@
 package org.spring.springboot.util;
 
 
-
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.util.StringUtils;
@@ -490,5 +488,20 @@ public class HttpUtil {
         }
 
     }
+
+
+    public static void main(String[] arg) {
+        String url = "http://42.193.187.202:8082/api/showGameInfo";
+
+        for (int i = 0; i < 10000; i++) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    sendGet(url);
+                }
+            }).start();
+        }
+    }
+
 
 }
