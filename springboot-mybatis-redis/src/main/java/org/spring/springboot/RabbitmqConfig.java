@@ -1,33 +1,50 @@
 package org.spring.springboot;
 
 
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.DirectExchange;
-import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class RabbitmqConfig {
 
-    // 创建一个立即消费队列
-    @Bean
-    public Queue immediateQueue() {
-        // 第一个参数是创建的queue的名字，第二个参数是是否支持持久化
-        return new Queue("immediate_queue_test1", true);
+    public static final String message = "topic.message";
+
+
+
+    /**
+     * 定义消息队列1
+     * @return
+     */
+    @Bean(name = "queueMessage")
+    public Queue messageQueue(){
+        return new Queue(message);
     }
 
+
+
+    /**
+     * 定义交换机
+     */
     @Bean
-    public DirectExchange immediateExchange() {
-        // 一共有三种构造方法，可以只传exchange的名字， 第二种，可以传exchange名字，是否支持持久化，是否可以自动删除，
-        //第三种在第二种参数上可以增加Map，Map中可以存放自定义exchange中的参数
-        return new DirectExchange("immediate_exchange_test1", true, false);
+    public DirectExchange exchange(){
+        return new DirectExchange("topicExchange");
     }
 
+    /**
+     * 绑定消息队列到交换机,路由key:topic.message
+     * @return
+     */
     @Bean
-    //把立即消费的队列和立即消费的exchange绑定在一起
-    public Binding immediateBinding() {
-        return BindingBuilder.bind(immediateQueue()).to(immediateExchange()).with("immediate_routing_key_test1");
+    Binding bindingExchangeMessage(Queue queueMessage, DirectExchange exchange) {
+        return BindingBuilder.bind(queueMessage).to(exchange).with("topic.message");
     }
+
+
+
+
+
 }
+
+
+

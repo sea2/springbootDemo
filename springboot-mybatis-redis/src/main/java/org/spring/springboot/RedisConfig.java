@@ -44,6 +44,8 @@ public class RedisConfig {
 
         template.setKeySerializer(stringRedisSerializer);
 
+
+
         // hash的key也采用String的序列化方式
 
         template.setHashKeySerializer(stringRedisSerializer);
@@ -61,6 +63,8 @@ public class RedisConfig {
         return template;
 
     }
+
+
 
 
 

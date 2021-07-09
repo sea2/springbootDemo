@@ -1,15 +1,20 @@
 package org.spring.springboot.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.redisson.Redisson;
+import org.redisson.api.RLock;
+import org.redisson.api.RedissonClient;
+import org.redisson.config.Config;
 import org.spring.springboot.constant.CityErrorInfoEnum;
 import org.spring.springboot.domain.City;
 import org.spring.springboot.repository.ActivationRecordPO;
 import org.spring.springboot.repository.ActivationRepository;
+import org.spring.springboot.result.ErrorInfoInterface;
 import org.spring.springboot.result.GlobalErrorInfoException;
 import org.spring.springboot.result.ResultBody;
+import org.spring.springboot.service.CityService;
 import org.spring.springboot.service.impl.AsyncTaskImpl;
+import org.spring.springboot.util.RedisLockUtil;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -42,6 +47,8 @@ public class DemoController {
     private AsyncTaskImpl asyncTask;
     @Autowired
     RabbitTemplate rabbitTemplate;
+    @Autowired
+    private CityService cityService;
 
     /**
      * 获取城市接口
@@ -83,14 +90,21 @@ public class DemoController {
 
 
     @RequestMapping(value = "/api/asyncTask")
-    public ResultBody asyncTask() throws GlobalErrorInfoException {
-
-        String str = "任务开始执行";
-        for (int i = 0; i < 1000; i++) {
-            asyncTask.asyncTask0();
+    public ResultBody asyncTask(HttpServletRequest request) throws GlobalErrorInfoException {
+        String countStr = request.getParameter("count");
+        if (countStr != null) {
+            int count = Integer.parseInt(countStr);
+            String str = "任务开始执行";
+            for (int i = 0; i < count; i++) {
+                asyncTask.asyncTask0();
+            }
         }
-        return new ResultBody<>(str);
+
+        return new ResultBody<>("");
     }
+
+    @Resource
+    RedisLockUtil redisLock;
 
 
     @RequestMapping(value = "/api/testAdd1")
@@ -102,12 +116,128 @@ public class DemoController {
     }
 
 
-    @RequestMapping(value = "/api/rabbitTest")
-    public ResultBody rabbitTest() throws GlobalErrorInfoException {
-        for (int i = 0; i < 100; i++) {
-            rabbitTemplate.convertAndSend("immediate_exchange_test1", "immediate_routing_key_test1", "消息rabbitMQ"+i);
+    @RequestMapping(value = "/api/redisLock")
+    public ResultBody redisLock(@RequestParam String id) {
+        String key = "dec_store_lock_" + id;
+        long time = System.currentTimeMillis();
+        int count = 0;
+        try {
+            //如果加锁失败
+            if (!redisLock.tryLock(key, String.valueOf(time), 0)) {
+
+                return new ResultBody<>(new ErrorInfoInterface() {
+                    @Override
+                    public String getCode() {
+                        return "201";
+                    }
+
+                    @Override
+                    public String getMessage() {
+                        return "上锁中";
+                    }
+                });
+
+            }
+
+
+            City city = cityService.findCityById(Long.parseLong(id));
+            if (city != null) {
+                long provinceId = city.getProvinceId();
+                long provinceIdNew = provinceId + 1;
+                count = (int) provinceIdNew;
+                city.setProvinceId(provinceIdNew);
+                long code = cityService.updateCity(city);
+            }
+
+        } catch (Exception e) {
+            return new ResultBody<>(new ErrorInfoInterface() {
+                @Override
+                public String getCode() {
+                    return "201";
+                }
+
+                @Override
+                public String getMessage() {
+                    return "异常";
+                }
+            });
+        } finally {
+            //解锁
+            redisLock.unLock(key, String.valueOf(time));
+        }
+        return new ResultBody<>("商品数量" + count);
+    }
+
+
+    @Autowired
+    private RedissonClient redissonClient;
+
+    @RequestMapping(value = "/api/redissonLock")
+    public ResultBody redissonLock(@RequestParam String id) {
+        String key = "dec_store_lock_" + id;
+        long time = System.currentTimeMillis();
+        int count = 0;
+
+        //获得name的锁
+        RLock lock = redissonClient.getLock(key);
+        //对name进行加锁 线程会一直等待 直到拿到该锁
+
+        try {
+            lock.lock();
+
+            City city = cityService.findCityById(Long.parseLong(id));
+            if (city != null) {
+                long provinceId = city.getProvinceId();
+                long provinceIdNew = provinceId + 1;
+                count = (int) provinceIdNew;
+                city.setProvinceId(provinceIdNew);
+                long code = cityService.updateCity(city);
+
+                City city2 = cityService.findCityById(Long.parseLong(id));
+            }
+
+        } catch (Exception e) {
+            return new ResultBody<>(new ErrorInfoInterface() {
+                @Override
+                public String getCode() {
+                    return "201";
+                }
+
+                @Override
+                public String getMessage() {
+                    return "异常";
+                }
+            });
+        } finally {
+            //解锁
+            lock.unlock();
+        }
+        return new ResultBody<>("商品数量" + count);
+    }
+
+
+    @RequestMapping(value = "/api/redisLock2")
+    public ResultBody redisLock2(@RequestParam String id) {
+
+        City city = cityService.findCityById(Long.parseLong(id));
+        if (city != null) {
+            long provinceId = city.getProvinceId();
+            provinceId = provinceId + 1;
+            city.setProvinceId(provinceId);
+            cityService.updateCity(city);
         }
 
+
+        return new ResultBody<>("买到");
+    }
+
+
+    @RequestMapping(value = "/api/rabbitTest")
+    public ResultBody rabbitTest() throws GlobalErrorInfoException {
+
+        for (int i = 1; i <= 100; i++) {
+            rabbitTemplate.convertAndSend("topicExchange", "topic.message", i);
+        }
         return new ResultBody<>("");
     }
 
@@ -217,15 +347,13 @@ public class DemoController {
     }
 
 
-
     @RequestMapping(value = "/api/sleep")
     public ResultBody sleep() throws GlobalErrorInfoException, InterruptedException {
 
-       Thread.sleep(10000);
+        Thread.sleep(10000);
 
         return new ResultBody<>("ok");
     }
-
 
 
 }

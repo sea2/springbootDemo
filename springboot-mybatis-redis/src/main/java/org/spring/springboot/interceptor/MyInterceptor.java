@@ -33,9 +33,9 @@ public class MyInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if (request.getParameterMap()!=null&&request.getParameterMap().size()>0) {
-            LOGGER.info("Request Info: [IP = {}] , [Time = {}] , [Method = {}] , [URI = {}] ,[Params = {{}}],[userAgent = {}] ",
-                    IpUtil.getIp(request), sdf.format(new Date()), request.getMethod(), request.getRequestURI(),
-                    HttpUtil.getParamString(request.getParameterMap()) , request.getHeader("user-agent"));
+//            LOGGER.info("Request Info: [IP = {}] , [Time = {}] , [Method = {}] , [URI = {}] ,[Params = {{}}],[userAgent = {}] ",
+//                    IpUtil.getIp(request), sdf.format(new Date()), request.getMethod(), request.getRequestURI(),
+//                    HttpUtil.getParamString(request.getParameterMap()) , request.getHeader("user-agent"));
         }
         return true; // 是否调用后续方法（controller接口方法、postHandle、afterCompletion）
     }

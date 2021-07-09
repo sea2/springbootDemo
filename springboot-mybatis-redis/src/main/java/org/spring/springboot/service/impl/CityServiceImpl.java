@@ -32,6 +32,8 @@ public class CityServiceImpl implements CityService {
 
     @Autowired
     RedisUtil redisUtil;
+
+    String startKey="city:city_";
     /**
      * 获取城市逻辑：
      * 如果缓存存在，从缓存中获取城市信息
@@ -39,7 +41,7 @@ public class CityServiceImpl implements CityService {
      */
     public City findCityById(Long id) {
         // 从缓存中获取城市信息
-        String key = "city_" + id;
+        String key = startKey+ id;
 
         // 缓存存在
         boolean hasKey =redisUtil.exists(key);
@@ -81,7 +83,7 @@ public class CityServiceImpl implements CityService {
         Long ret = cityDao.updateCity(city);
 
         // 缓存存在，删除缓存
-        String key = "city_" + city.getId();
+        String key = startKey + city.getId();
         boolean hasKey = redisTemplate.hasKey(key);
         if (hasKey) {
             redisTemplate.delete(key);
@@ -99,7 +101,7 @@ public class CityServiceImpl implements CityService {
 
 
         // 缓存存在，删除缓存
-        String key = "city_" + id;
+        String key = startKey + id;
         boolean hasKey = redisTemplate.hasKey(key);
         if (hasKey) {
             redisTemplate.delete(key);
@@ -110,3 +112,6 @@ public class CityServiceImpl implements CityService {
     }
 
 }
+
+
+

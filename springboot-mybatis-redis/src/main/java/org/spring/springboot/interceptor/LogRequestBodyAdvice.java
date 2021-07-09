@@ -28,7 +28,7 @@ public class LogRequestBodyAdvice implements RequestBodyAdvice {
     @Override
     public Object afterBodyRead(Object o, HttpInputMessage httpInputMessage, MethodParameter methodParameter, Type type, Class<? extends HttpMessageConverter<?>> aClass) {
         Method method = methodParameter.getMethod();
-        log.info("{}.{}-body:{}", method.getDeclaringClass().getSimpleName(), method.getName(), JSON.toJSONString(o));
+//        log.info("{}.{}-body:{}", method.getDeclaringClass().getSimpleName(), method.getName(), JSON.toJSONString(o));
 
         return o;
     }
@@ -36,7 +36,7 @@ public class LogRequestBodyAdvice implements RequestBodyAdvice {
     @Override
     public Object handleEmptyBody(Object o, HttpInputMessage httpInputMessage, MethodParameter methodParameter, Type type, Class<? extends HttpMessageConverter<?>> aClass) {
         Method method = methodParameter.getMethod();
-        log.info("{}.{}", method.getDeclaringClass().getSimpleName(), method.getName());
+//        log.info("{}.{}", method.getDeclaringClass().getSimpleName(), method.getName());
         return o;
     }
 }
