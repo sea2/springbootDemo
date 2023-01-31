@@ -26,4 +26,8 @@ public class LogResponseBodyAdvice implements ResponseBodyAdvice {
         log.info("{}.{},url={},result={}",method.getDeclaringClass().getSimpleName(),method.getName(),url,JSON.toJSONString(o));
         return o;
     }
+
+
+
+
 }

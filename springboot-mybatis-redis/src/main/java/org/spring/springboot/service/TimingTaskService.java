@@ -12,7 +12,7 @@ import java.util.concurrent.Executors;
 /**
  * 常用的表达式
  * <p>
- * 0 0 10,14,16 * * ?	每天上午10点，下午2点，4点每天上午10点，下午2点，4点
+ * 0 0 10,14,16 * * ?	每天上午10点，下午2点，4点每天
  * 0 0/30 9-17 * * ?	朝九晚五工作时间内每半小时
  * 0 0 12 ? * WED	表示每个星期三中午12点
  * 0 0 12 * * ?	每天中午12点触发
@@ -68,9 +68,8 @@ public class TimingTaskService {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-
     }
+
 
 
 

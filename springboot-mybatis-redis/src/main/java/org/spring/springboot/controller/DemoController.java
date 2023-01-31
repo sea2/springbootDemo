@@ -47,7 +47,7 @@ public class DemoController {
     private AsyncTaskImpl asyncTask;
     @Autowired
     RabbitTemplate rabbitTemplate;
-    @Autowired
+    @Resource
     private CityService cityService;
 
     /**
@@ -236,7 +236,7 @@ public class DemoController {
     public ResultBody rabbitTest() throws GlobalErrorInfoException {
 
         for (int i = 1; i <= 100; i++) {
-            rabbitTemplate.convertAndSend("topicExchange", "topic.message", i);
+            rabbitTemplate.convertAndSend("directExchange", "topic.message", i);
         }
         return new ResultBody<>("");
     }

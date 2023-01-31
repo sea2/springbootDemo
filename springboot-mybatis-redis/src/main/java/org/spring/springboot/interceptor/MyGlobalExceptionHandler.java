@@ -1,10 +1,12 @@
 package org.spring.springboot.interceptor;
 
 
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 
 import javax.servlet.http.HttpServletRequest;
@@ -50,6 +52,8 @@ public class MyGlobalExceptionHandler {
 //        return mv;
 //    }
 //}
+
+
 
 
 }

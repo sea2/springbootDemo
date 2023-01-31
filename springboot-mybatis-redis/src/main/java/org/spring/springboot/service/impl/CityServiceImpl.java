@@ -33,7 +33,8 @@ public class CityServiceImpl implements CityService {
     @Autowired
     RedisUtil redisUtil;
 
-    String startKey="city:city_";
+    String startKey = "city:city_";
+
     /**
      * 获取城市逻辑：
      * 如果缓存存在，从缓存中获取城市信息
@@ -41,15 +42,16 @@ public class CityServiceImpl implements CityService {
      */
     public City findCityById(Long id) {
         // 从缓存中获取城市信息
-        String key = startKey+ id;
+        String key = startKey + id;
 
         // 缓存存在
-        boolean hasKey =redisUtil.exists(key);
+        boolean hasKey = redisUtil.exists(key);
         if (hasKey) {
             City city = (City) redisUtil.get(key);
-
-            LOGGER.info("CityServiceImpl.findCityById() : 从缓存中获取了城市 >> " + city.toString());
-            return city;
+            if (city != null) {
+                LOGGER.info("CityServiceImpl.findCityById() : 从缓存中获取了城市 >> " + city.toString());
+                return city;
+            }
         }
 
         // 从 DB 中获取城市信息
