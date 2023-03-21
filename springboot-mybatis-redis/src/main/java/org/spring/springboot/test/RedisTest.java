@@ -1,6 +1,8 @@
 package org.spring.springboot.test;
 
+import com.alibaba.fastjson.JSON;
 import org.junit.Test;
+import org.spring.springboot.mongo.TestInfo;
 import org.spring.springboot.util.HttpUtil;
 import org.spring.springboot.util.RedisUtils;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,7 +24,7 @@ public class RedisTest {
      */
     @Test
     public void set() {
-        redisUtils.set("redis_key", "redis_vale");
+        redisUtils.set("redis_key",JSON.toJSONString(new TestInfo(1,"测试")));
     }
 
     /**

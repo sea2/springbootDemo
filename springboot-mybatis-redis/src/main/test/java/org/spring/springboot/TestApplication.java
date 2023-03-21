@@ -17,9 +17,12 @@ import java.util.concurrent.ExecutionException;
 public class TestApplication {
 
 
+    @Autowired
+    StringRedisTemplate stringRedisTemplate;//操作k-v都是字符串
+
+
     @Test
     public void test() {
-
 
     }
 

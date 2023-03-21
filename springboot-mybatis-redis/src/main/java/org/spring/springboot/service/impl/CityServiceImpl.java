@@ -1,16 +1,24 @@
 package org.spring.springboot.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.spring.springboot.dao.CityDao;
 import org.spring.springboot.domain.City;
+import org.spring.springboot.mongo.TestInfo;
 import org.spring.springboot.service.CityService;
 import org.spring.springboot.util.RedisUtil;
+import org.spring.springboot.util.RedisUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -30,10 +38,13 @@ public class CityServiceImpl implements CityService {
     @Autowired
     private RedisTemplate redisTemplate;
 
-    @Autowired
-    RedisUtil redisUtil;
 
     String startKey = "city:city_";
+
+
+
+    @Autowired
+    private  RedisUtils redisUtils;
 
     /**
      * 获取城市逻辑：
@@ -45,9 +56,15 @@ public class CityServiceImpl implements CityService {
         String key = startKey + id;
 
         // 缓存存在
-        boolean hasKey = redisUtil.exists(key);
+        boolean hasKey = redisUtils.exists(key);
+        ObjectMapper objectMapper = new ObjectMapper();
         if (hasKey) {
-            City city = (City) redisUtil.get(key);
+            City city = null;
+            try {
+                city = objectMapper.readValue( redisUtils.get(key),City.class);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             if (city != null) {
                 LOGGER.info("CityServiceImpl.findCityById() : 从缓存中获取了城市 >> " + city.toString());
                 return city;
@@ -58,7 +75,11 @@ public class CityServiceImpl implements CityService {
         City city = cityDao.findById(id);
 
         // 插入缓存
-        redisUtil.set(key, city);
+        try {
+            redisUtils.set(key, objectMapper.writeValueAsString(city));
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
         LOGGER.info("CityServiceImpl.findCityById() : 城市插入缓存 >> " + city.toString());
 
         return city;
