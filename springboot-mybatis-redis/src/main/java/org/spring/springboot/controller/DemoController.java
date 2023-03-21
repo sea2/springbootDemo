@@ -169,8 +169,6 @@ public class DemoController {
     }
 
 
-    @Autowired
-    private RedissonClient redissonClient;
 
     @RequestMapping(value = "/api/redissonLock")
     public ResultBody redissonLock(@RequestParam String id) {
@@ -178,12 +176,9 @@ public class DemoController {
         long time = System.currentTimeMillis();
         int count = 0;
 
-        //获得name的锁
-        RLock lock = redissonClient.getLock(key);
         //对name进行加锁 线程会一直等待 直到拿到该锁
 
         try {
-            lock.lock();
 
             City city = cityService.findCityById(Long.parseLong(id));
             if (city != null) {
@@ -210,7 +205,6 @@ public class DemoController {
             });
         } finally {
             //解锁
-            lock.unlock();
         }
         return new ResultBody<>("商品数量" + count);
     }
@@ -298,42 +292,7 @@ public class DemoController {
         for (ActivationRecordPO po : list) {
             boolean isHas = false;
             boolean isHas2 = false;
-            for (ActivationRecordPO newPo : listDeviceIdNew) {
-                if (newPo.getDevice_id().equals(po.getDevice_id())) {
-                    isHas = true;
-                    break;
-                }
-            }
-            for (ActivationRecordPO newPo : listGaidNew) {
-                if (newPo.getGa_id() != null && newPo.getGa_id().equals(po.getGa_id())) {
-                    isHas2 = true;
-                    break;
-                }
-            }
-            if (!isHas) {
-                if (!StringUtils.isEmpty(po.getDevice_id()))
-                    listDeviceIdNew.add(po);
-            }
-            if (!isHas2) {
-                if (!StringUtils.isEmpty(po.getGa_id()))
-                    listGaidNew.add(po);
-            }
 
-            //新增
-            if (!StringUtils.isEmpty(po.getDevice_id())) {
-                Query queryAdd = new Query(Criteria.where("create_time").lte(startTime)).addCriteria(Criteria.where("device_id").is(po.getDevice_id()));
-                List<ActivationRecordPO> listAdd = mongoTemplate.find(queryAdd, ActivationRecordPO.class);
-                if (listAdd.size() == 0) {
-                    deviceCount++;
-                }
-            }
-            if (!StringUtils.isEmpty(po.getGa_id())) {
-                Query queryAdd = new Query(Criteria.where("create_time").lte(startTime)).addCriteria(Criteria.where("ga_id").is(po.getGa_id()));
-                List<ActivationRecordPO> listAdd = mongoTemplate.find(queryAdd, ActivationRecordPO.class);
-                if (listAdd.size() == 0) {
-                    gaidCount++;
-                }
-            }
         }
 
 
