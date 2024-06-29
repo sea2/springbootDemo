@@ -1,5 +1,6 @@
 package org.spring.springboot.test;
 
+
 import com.sun.org.apache.xml.internal.security.utils.Base64;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,15 +23,15 @@ import java.net.SocketException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Enumeration;
-import java.util.List;
+import java.util.*;
+
 
 public class test {
     public int versionCompare(String version1, String version2) {
         String[] v1Arr = version1.split("\\.");
         String[] v2Arr = version2.split("\\.");
+
+
 
         int i = 0;
         int diff = 0;
@@ -54,6 +55,7 @@ public class test {
         String b = "1.4.6";
         int c = new test().versionCompare(a, b);
         System.out.println(c);
+
 
         refreshFileList("h:\\迅雷下载");
     }
@@ -84,5 +86,36 @@ public class test {
             }
         }
     }
+
+
+
+
+
+    /**
+     * @param url
+     * @param name
+     * @return
+     */
+    public static String getQueryString(String url, String name) {
+        Map<String, String> map = new HashMap<String, String>();
+        if (url != null && url.contains("?") && url.contains("=")) {
+            String[] arr = url.split("\\?");
+            if (arr.length > 1) {
+                String[] arrTemp = arr[1].split("&");
+                    for (String str : arrTemp) {
+                        String[] qs = str.split("=");
+                        if(qs.length>1)
+                            map.put(qs[0], qs[1]);
+                }
+            }
+        }
+        if (map.containsKey(name)) {
+            return map.get(name);
+
+        }
+        return "";
+    }
+
+
 
 }

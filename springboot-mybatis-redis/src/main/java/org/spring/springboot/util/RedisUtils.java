@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
+import java.util.concurrent.TimeUnit;
+
 @Component
 public class RedisUtils {
 
@@ -30,6 +32,20 @@ public class RedisUtils {
         boolean result = false;
         try {
             redisTemplate.opsForValue().set(key, value);
+            result = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+    /**
+     * 写入缓存  有效时间
+     */
+    public boolean set(final String key, String value ,Long expireTime ,TimeUnit timeUnit) {
+        boolean result = false;
+        try {
+            redisTemplate.opsForValue().set(key, value);
+            redisTemplate.expire(key, expireTime, timeUnit);
             result = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -65,6 +81,13 @@ public class RedisUtils {
         return result;
     }
 
-
+    /**
+     * 判断缓存中是否有对应的value
+     * @param key
+     * @return
+     */
+    public boolean exists(final String key) {
+        return redisTemplate.hasKey(key);
+    }
 
 }

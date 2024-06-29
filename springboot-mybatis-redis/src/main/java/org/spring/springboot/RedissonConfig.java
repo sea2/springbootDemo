@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+//@Configuration
 public class RedissonConfig {
 
     /**
@@ -21,7 +21,7 @@ public class RedissonConfig {
         Config config = new Config();
 
         config.useSingleServer()
-                .setAddress("redis://r-j6cj23156vdozpilh1pd.redis.rds.aliyuncs.com:6379").setPassword("magic0427@tech");
+                .setAddress("redis://r-uf63mekl1t2wqrdhw5pd.redis.rds.aliyuncs.com:6379").setPassword("lj2020Rz").setDatabase(19);
 
         return Redisson.create(config);
     }

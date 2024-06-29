@@ -28,10 +28,17 @@ import java.util.Map;
 public class MyInterceptor implements HandlerInterceptor {
     private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SSS");
-
+    ThreadLocal<Long> localThread = new ThreadLocal<Long>();
     // 进入controller之前
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+
+        //线程方式
+        localThread.set(System.currentTimeMillis());
+        //request方式
+        request.setAttribute("_startTime", System.currentTimeMillis());
+
+
         if (request.getParameterMap()!=null&&request.getParameterMap().size()>0) {
 //            LOGGER.info("Request Info: [IP = {}] , [Time = {}] , [Method = {}] , [URI = {}] ,[Params = {{}}],[userAgent = {}] ",
 //                    IpUtil.getIp(request), sdf.format(new Date()), request.getMethod(), request.getRequestURI(),
@@ -50,6 +57,11 @@ public class MyInterceptor implements HandlerInterceptor {
     // controller接口方法正常执行、抛出异常都会执行afterCompletion方法
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+
+        Long endTime = System.currentTimeMillis();
+        System.out.println(request.getServletPath() + " >> http请求结束线程：" + (endTime - localThread.get()));
+        Long startTime = (Long)request.getAttribute("_startTime");
+        System.out.println(request.getServletPath() + " >> http请求结束:" + (endTime - startTime));
     }
 
 

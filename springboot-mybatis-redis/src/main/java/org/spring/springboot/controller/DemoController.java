@@ -25,12 +25,14 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.xml.transform.Result;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -169,8 +171,8 @@ public class DemoController {
     }
 
 
-    @Autowired
-    private RedissonClient redissonClient;
+//    @Autowired
+//    private RedissonClient redissonClient;
 
     @RequestMapping(value = "/api/redissonLock")
     public ResultBody redissonLock(@RequestParam String id) {
@@ -178,40 +180,105 @@ public class DemoController {
         long time = System.currentTimeMillis();
         int count = 0;
 
-        //获得name的锁
-        RLock lock = redissonClient.getLock(key);
-        //对name进行加锁 线程会一直等待 直到拿到该锁
-
-        try {
-            lock.lock();
-
-            City city = cityService.findCityById(Long.parseLong(id));
-            if (city != null) {
-                long provinceId = city.getProvinceId();
-                long provinceIdNew = provinceId + 1;
-                count = (int) provinceIdNew;
-                city.setProvinceId(provinceIdNew);
-                long code = cityService.updateCity(city);
-
-                City city2 = cityService.findCityById(Long.parseLong(id));
-            }
-
-        } catch (Exception e) {
-            return new ResultBody<>(new ErrorInfoInterface() {
-                @Override
-                public String getCode() {
-                    return "201";
-                }
-
-                @Override
-                public String getMessage() {
-                    return "异常";
-                }
-            });
-        } finally {
-            //解锁
-            lock.unlock();
-        }
+//        //获得name的锁
+//        RLock lock = redissonClient.getLock(key);
+//        //对name进行加锁 线程会一直等待 直到拿到该锁
+//
+//        try {
+//            //如果没有手动解开的话，10秒钟后将会自动解开
+//            lock.lock(10, TimeUnit.SECONDS);
+//            try {
+//                Thread.sleep(3000);   // 耗时任务
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//            City city = cityService.findCityById(Long.parseLong(id));
+//            if (city != null) {
+//                long provinceId = city.getProvinceId();
+//                long provinceIdNew = provinceId + 1;
+//                count = (int) provinceIdNew;
+//                city.setProvinceId(provinceIdNew);
+//                long code = cityService.updateCity(city);
+//
+//                City city2 = cityService.findCityById(Long.parseLong(id));
+//            }
+//
+//        } catch (Exception e) {
+//            return new ResultBody<>(new ErrorInfoInterface() {
+//                @Override
+//                public String getCode() {
+//                    return "201";
+//                }
+//
+//                @Override
+//                public String getMessage() {
+//                    return "异常";
+//                }
+//            });
+//        } finally {
+//            //解锁
+//            lock.unlock();
+//        }
+        return new ResultBody<>("商品数量" + count);
+    }
+    @RequestMapping(value = "/api/redissonLockTry")
+    public ResultBody redissonLockTry(@RequestParam String uid) {
+        String key = "dec_store_lock_" + uid;
+        long time = System.currentTimeMillis();
+        int count = 0;
+//
+//        //获得name的锁
+//        RLock lock = redissonClient.getLock(key);
+//        //2.尝试获取锁
+//        boolean isLock = lock.tryLock();
+//        if (!isLock){
+//            //获取锁失败，说明正在上锁中可报错提示
+//            return new ResultBody<>(new ErrorInfoInterface() {
+//                @Override
+//                public String getCode() {
+//                    return "202";
+//                }
+//
+//                @Override
+//                public String getMessage() {
+//                    return "获取锁失败，用户正在操作";
+//                }
+//            });
+//        }
+//        try {
+//            //如果没有手动解开的话，10秒钟后将会自动解开
+//            try {
+//                Thread.sleep(3000);   // 耗时任务
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//            City city = cityService.findCityById(1L);
+//            if (city != null) {
+//                long provinceId = city.getProvinceId();
+//                long provinceIdNew = provinceId + 1;
+//                count = (int) provinceIdNew;
+//                city.setProvinceId(provinceIdNew);
+//                long code = cityService.updateCity(city);
+//
+//                City city2 = cityService.findCityById(1L);
+//            }
+//
+//        } catch (Exception e) {
+//            return new ResultBody<>(new ErrorInfoInterface() {
+//                @Override
+//                public String getCode() {
+//                    return "201";
+//                }
+//
+//                @Override
+//                public String getMessage() {
+//                    return "异常";
+//                }
+//            });
+//        } finally {
+//            //解锁
+//            lock.unlock();
+//        }
         return new ResultBody<>("商品数量" + count);
     }
 

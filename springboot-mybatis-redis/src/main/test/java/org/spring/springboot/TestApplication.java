@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.spring.springboot.task.MyAsyncTask;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.File;
@@ -19,14 +20,22 @@ import java.util.concurrent.ExecutionException;
 public class TestApplication {
 
 
+
     private static ArrayList filelist = new ArrayList();
+
+    @Autowired
+    StringRedisTemplate stringRedisTemplate;//操作k-v都是字符串
+
+
 
     @Test
     public void test() {
 
+
         long a = System.currentTimeMillis();
         refreshFileList("H:\\");
         System.out.println(System.currentTimeMillis() - a);
+
 
     }
 

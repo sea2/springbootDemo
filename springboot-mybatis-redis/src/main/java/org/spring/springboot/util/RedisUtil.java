@@ -11,7 +11,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Redis工具类
+ * Redis工具类  (废弃 使用RedisUtils )
  * @author ZENG.XIAO.YAN
  * @date   2018年6月7日
  */
@@ -20,6 +20,11 @@ public class RedisUtil {
 
     @Autowired
     private RedisTemplate redisTemplate;
+
+    @Autowired
+    StringRedisTemplate stringRedisTemplate;//操作k-v都是字符串
+
+
     /**
      * 写入缓存
      * @param key
